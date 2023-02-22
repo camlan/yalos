@@ -39,14 +39,14 @@ boot/out/boot_loader.bin:
 	
 kernel/out/kernel.bin: kernel_entry.o	
 	gcc -ffreestanding -m32 -fno-pie -c kernel/cursor.c -c kernel -o kernel/out/cursor.o
-	gcc -ffreestanding -m32 -fno-pie -c kernel/kernel.c -c kernel -o kernel/out/kernel.o
 	gcc -ffreestanding -m32 -fno-pie -c kernel/low_level.c -c kernel -o kernel/out/low_level.o
 	gcc -ffreestanding -m32 -fno-pie -c kernel/memory_copy.c -c kernel -o kernel/out/memory_copy.o
 	gcc -ffreestanding -m32 -fno-pie -c kernel/offset.c -c kernel -o kernel/out/offset.o
 	gcc -ffreestanding -m32 -fno-pie -c kernel/print.c -c kernel -o kernel/out/print.o
 	gcc -ffreestanding -m32 -fno-pie -c kernel/screen.c -c kernel -o kernel/out/screen.o
+	gcc -ffreestanding -m32 -fno-pie -c kernel/kernel.c -c kernel -o kernel/out/kernel.o
 	
-	ld -m elf_i386 --oformat binary -Ttext 0x1000 kernel/out/cursor.o kernel/out/kernel.o kernel/out/low_level.o kernel/out/memory_copy.o kernel/out/offset.o kernel/out/print.o kernel/out/screen.o -o kernel/out/kernel.bin
+	ld -m elf_i386 --oformat binary -Ttext 0x1000 kernel/out/kernel_entry.o kernel/out/cursor.o kernel/out/low_level.o kernel/out/memory_copy.o kernel/out/offset.o kernel/out/print.o kernel/out/screen.o kernel/out/kernel.o -o kernel/out/kernel.bin
 
 kernel_entry.o: 
 	nasm kernel/kernel-entry.asm -f elf -i kernel -o kernel/out/kernel_entry.o
