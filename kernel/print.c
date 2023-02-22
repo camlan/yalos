@@ -55,23 +55,16 @@ set_cursor (offset);
 void print_2(char* message) {
     int offset = get_cursor();
     int i = 0;
-    while (message[i] != 0) {
-		
-		if (offset >= VIDEO_MEMORY_SIZE) {
-			offset = handle_scrolling_2(offset);
-			
-		}
-		
+    while (message[i] != 0) {		
         if (message[i] == '\n') {
-            // offset = move_screen_offset_to_new_line(offset);
-			//set_char_at_video_memory('W', offset);
-            //offset += 2;
 			offset = move_screen_offset_to_new_line(offset);
-			
         } else {
             set_char_at_video_memory(message[i], offset);
             offset += 2;
         }
+        if (offset >= VIDEO_MEMORY_SIZE) {
+			offset = handle_scrolling_2(offset);	
+		}
         i++;
     }
     set_cursor(offset);

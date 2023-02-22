@@ -2,14 +2,10 @@
 
 void _start () {
 	clear_screen();
-	print_2("Hello");
-	set_cursor(get_cursor() + 80 * 2- 10);
-	print_2("World");
-	print_2("World\nBrave");
+	char *tab[] = {"1\n", "2\n", "3\n", "4\n", "5\n", "6\n", "7\n", "8\n", "9\n", "10\n","11\n","12\n","13\n","14\n","15\n","16\n","17\n","18\n","19\n","20\n","21\n","22\n","23\n","24\n","25\n","26\n","27\n","28\n","29\n","30\n","31\n" };
 	
-	char *tab[] = {"a", "b", "c", "d", "e", "f", "g","h","i","j","m","n","o","p","r","s","t","u","x","y","z","1","2","3","5","4","777", "444" };
-	
-	for (int i = 0; i < MAX_ROWS+3; i++) {
+	for (int i = 0; i < 31; i++) {
+		print_2(tab[i]);
 		print_2("\n");
 	}
 }

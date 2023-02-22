@@ -12,8 +12,8 @@ int get_cursor() {
 } 
 
 void set_cursor(int offset) {
-    offset /= 2;
     // Convert from cell offset to char offset .
+    offset /= 2;
     // This is similar to get_cursor , only now we write
     // bytes to those internal device registers.
     port_byte_out (REG_SCREEN_CTRL , 14);

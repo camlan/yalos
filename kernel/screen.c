@@ -43,6 +43,5 @@ int handle_scrolling_2 (int offset) {
 	for (int col = 0; col < MAX_COLS; col++) {
         set_char_at_video_memory(' ', get_screen_offset(MAX_ROWS - 1, col));
     }
-	
-	return offset - 2 * MAX_COLS;
+	return offset - (2 * MAX_COLS);
 }
