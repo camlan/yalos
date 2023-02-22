@@ -37,7 +37,7 @@ os-image:boot/out/boot_loader.bin kernel/out/kernel.bin
 boot/out/boot_loader.bin:
 	nasm boot/boot-kernel.asm -f bin -o boot/out/boot_loader.bin -i boot
 	
-kernel/out/kernel.bin: kernel_entry.o	
+kernel/out/kernel.bin: kernel/out/kernel_entry.o	
 	gcc -ffreestanding -m32 -fno-pie -c kernel/cursor.c -c kernel -o kernel/out/cursor.o
 	gcc -ffreestanding -m32 -fno-pie -c kernel/low_level.c -c kernel -o kernel/out/low_level.o
 	gcc -ffreestanding -m32 -fno-pie -c kernel/memory_copy.c -c kernel -o kernel/out/memory_copy.o
@@ -48,7 +48,8 @@ kernel/out/kernel.bin: kernel_entry.o
 	
 	ld -m elf_i386 --oformat binary -Ttext 0x1000 kernel/out/kernel_entry.o kernel/out/cursor.o kernel/out/low_level.o kernel/out/memory_copy.o kernel/out/offset.o kernel/out/print.o kernel/out/screen.o kernel/out/kernel.o -o kernel/out/kernel.bin
 
-kernel_entry.o: 
+kernel/out/kernel_entry.o: 
 	nasm kernel/kernel-entry.asm -f elf -i kernel -o kernel/out/kernel_entry.o
 
-clean: rm -fr *.bin *.dis *.o  rm -fr kernel/out/*.o boot/*.bin drivers/*.o
+clean: 
+	rm -fr *.bin *.dis *.o  rm -fr kernel/out/*.o boot/out/*.bin drivers/out/*.o
