@@ -2,7 +2,6 @@
 #define MAX_ROWS 25
 #define MAX_COLS 80
 #define VIDEO_MEMORY_SIZE (MAX_ROWS * MAX_COLS * 2)
-#define ROW_OFFSET 160
 #define WHITE_ON_BLACK 0x0f
 
 #define REG_SCREEN_CTRL 0x3D4
