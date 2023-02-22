@@ -1,5 +1,17 @@
 #include "screen.h"
 
+void clear_screen () {
+    int screen_size = MAX_COLS * MAX_ROWS;
+    int i;
+    char *screen = VIDEO_ADDRESS;
+
+    for (i = 0; i < screen_size; i++) {
+        screen[i*2] = ' ';
+        screen[i*2+1] = WHITE_ON_BLACK;
+    }
+    set_cursor(get_screen_offset(0, 0));
+}
+
 int handle_scrolling ( int cursor_offset ) {
 	// If the cursor is within the screen , return it unmodified .
 	if ( cursor_offset < MAX_ROWS * MAX_COLS *2) {
@@ -34,4 +46,3 @@ int handle_scrolling_2 (int offset) {
 	
 	return offset - 2 * MAX_COLS;
 }
-

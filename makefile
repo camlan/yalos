@@ -38,20 +38,15 @@ boot/out/boot_loader.bin:
 	nasm boot/boot-kernel.asm -f bin -o boot/out/boot_loader.bin -i boot
 	
 kernel/out/kernel.bin: kernel_entry.o	
-	gcc -ffreestanding -m32 -fno-pie -c kernel/clear_screen.c -c kernel -o kernel/out/clear_screen.o
-	gcc -ffreestanding -m32 -fno-pie -c kernel/get_cursor.c -c kernel -o kernel/out/get_cursor.o
-	gcc -ffreestanding -m32 -fno-pie -c kernel/get_screen_offset.c -c kernel -o kernel/out/get_screen_offset.o
-	gcc -ffreestanding -m32 -fno-pie -c kernel/handle_scrolling.c -c kernel -o kernel/out/handle_scrolling.o
+	gcc -ffreestanding -m32 -fno-pie -c kernel/cursor.c -c kernel -o kernel/out/cursor.o
+	gcc -ffreestanding -m32 -fno-pie -c kernel/kernel.c -c kernel -o kernel/out/kernel.o
 	gcc -ffreestanding -m32 -fno-pie -c kernel/low_level.c -c kernel -o kernel/out/low_level.o
 	gcc -ffreestanding -m32 -fno-pie -c kernel/memory_copy.c -c kernel -o kernel/out/memory_copy.o
+	gcc -ffreestanding -m32 -fno-pie -c kernel/offset.c -c kernel -o kernel/out/offset.o
 	gcc -ffreestanding -m32 -fno-pie -c kernel/print.c -c kernel -o kernel/out/print.o
-	gcc -ffreestanding -m32 -fno-pie -c kernel/print_at.c -c kernel -o kernel/out/print_at.o
-	gcc -ffreestanding -m32 -fno-pie -c kernel/print_char.c -c kernel -o kernel/out/print_char.o
-	gcc -ffreestanding -m32 -fno-pie -c kernel/set_cursor.c -c kernel -o kernel/out/set_cursor.o
-	gcc -ffreestanding -m32 -fno-pie -c kernel/low_level.c -c kernel -o kernel/out/low_level.o
-	gcc -ffreestanding -m32 -fno-pie -c kernel/kernel-2.c -c kernel -o kernel/out/kernel.o
+	gcc -ffreestanding -m32 -fno-pie -c kernel/screen.c -c kernel -o kernel/out/screen.o
 	
-	ld -m elf_i386 --oformat binary -Ttext 0x1000 kernel/out/kernel_entry.o kernel/out/memory_copy.o kernel/out/get_cursor.o kernel/out/handle_scrolling.o kernel/out/set_cursor.o kernel/out/get_screen_offset.o kernel/out/print_char.o kernel/out/print_at.o kernel/out/print.o kernel/out/clear_screen.o kernel/out/low_level.o kernel/out/kernel.o -o kernel/out/kernel.bin
+	ld -m elf_i386 --oformat binary -Ttext 0x1000 kernel/out/cursor.o kernel/out/kernel.o kernel/out/low_level.o kernel/out/memory_copy.o kernel/out/offset.o kernel/out/print.o kernel/out/screen.o -o kernel/out/kernel.bin
 
 kernel_entry.o: 
 	nasm kernel/kernel-entry.asm -f elf -i kernel -o kernel/out/kernel_entry.o
