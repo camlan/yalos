@@ -1,4 +1,4 @@
-#include "screen.h";
+#include "screen.h"
 
 int get_cursor() {
 	port_byte_out (REG_SCREEN_CTRL , 14);
