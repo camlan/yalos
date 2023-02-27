@@ -1,4 +1,5 @@
 #include "screen.h"
+#include "low_level.h"
 
 int get_cursor() {
 	port_byte_out (REG_SCREEN_CTRL , 14);
