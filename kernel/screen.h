@@ -1,4 +1,5 @@
-#ifndef SCREEN_CONST_FUNC
+#pragma once
+
 #define SCREEN_CONST_FUNC
 #define VIDEO_ADDRESS 0xb8000
 #define MAX_ROWS 25
@@ -12,4 +13,3 @@
 void clear_screen();
 int handle_scrolling(int offset);
 void set_char_at_video_memory(char c, int i);
-#endif
